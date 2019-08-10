@@ -73,6 +73,11 @@ public class FavouriteWidget extends AppWidgetProvider {
     @Override
     public void onEnabled(Context context) {
         // Enter relevant functionality for when the first widget is created
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(null);
+        } else {
+            context.startService(null);
+        }
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,13 +18,16 @@ import com.example.submission_3.adapter.TvShowAdapter;
 import com.example.submission_3.tvshowpackage.TVShow;
 import com.example.submission_3.viewmodel.MyViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class FavoriteTVFragment extends Fragment {
+public class FavoriteTVFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private TvShowAdapter adapter;
     private MyViewModel myViewModel;
+    private List<TVShow> list = new ArrayList<>();
     private ImageView imageView;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private Observer<List<TVShow>> getFavTVShows = new Observer<List<TVShow>>() {
         @Override
         public void onChanged(@Nullable List<TVShow> tvShows) {
@@ -32,6 +36,8 @@ public class FavoriteTVFragment extends Fragment {
                 mRecyclerView.setAdapter(adapter);
                 imageView.setVisibility(View.GONE);
             } else {
+                adapter = new TvShowAdapter(getContext(), list);
+                mRecyclerView.setAdapter(adapter);
                 imageView.setVisibility(View.VISIBLE);
             }
         }
@@ -43,6 +49,9 @@ public class FavoriteTVFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_tv, container, false);
         mRecyclerView = v.findViewById(R.id.rv_tvshow);
         imageView = v.findViewById(R.id.error_img);
+        swipeRefreshLayout = v.findViewById(R.id.sr_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
         return v;
     }
 
@@ -60,5 +69,12 @@ public class FavoriteTVFragment extends Fragment {
     public void onResume() {
         super.onResume();
         loadFavoriteData();
+    }
+
+    @Override
+    public void onRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
+        loadFavoriteData();
+
     }
 }

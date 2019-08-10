@@ -67,7 +67,6 @@ public class MyViewModel extends ViewModel {
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
 
                 listMovies.setValue(response.body().getResults());
-                Toast.makeText(context, "Success Fetching Movie Data", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -134,7 +133,6 @@ public class MyViewModel extends ViewModel {
             @Override
             public void onResponse(Call<TVShowResponse> call, Response<TVShowResponse> response) {
                 listTvs.setValue(response.body().getResults());
-                Toast.makeText(context, "Success Fetching TV Data", Toast.LENGTH_SHORT).show();
             }
 
             @Override

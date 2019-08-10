@@ -40,20 +40,21 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MoviesAdapter.ViewHolder viewHolder, final int i) {
-        String poster = "https://image.tmdb.org/t/p/w500" + movies.get(i).getPosterPath();
+    public void onBindViewHolder(@NonNull MoviesAdapter.ViewHolder viewHolder, int i) {
+        String poster = "https://image.tmdb.org/t/p/w500" + movies.get(viewHolder.getAdapterPosition()).getPosterPath();
+
         Glide.with(context)
                 .load(poster)
                 .apply(new RequestOptions().override(300, 300))
                 .into(viewHolder.img);
-        viewHolder.txtTitle.setText(movies.get(i).getTitle());
-        viewHolder.txtDateStart.setText(movies.get(i).getReleaseDate());
-        viewHolder.rating.setText((movies.get(i).getVoteAverage()).toString());
+        viewHolder.txtTitle.setText(movies.get(viewHolder.getAdapterPosition()).getTitle());
+        viewHolder.txtDateStart.setText(movies.get(viewHolder.getAdapterPosition()).getReleaseDate());
+        viewHolder.rating.setText((movies.get(viewHolder.getAdapterPosition()).getVoteAverage()).toString());
         viewHolder.imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent detailIntent = new Intent(context, DetailActivity.class);
-                detailIntent.putExtra(DetailActivity.EXTRA_DATA, movies.get(i));
+                detailIntent.putExtra(DetailActivity.EXTRA_DATA, movies.get(viewHolder.getAdapterPosition()));
                 detailIntent.putExtra("check", true);
                 context.startActivity(detailIntent);
             }

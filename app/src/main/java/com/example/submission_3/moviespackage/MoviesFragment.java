@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,12 +28,13 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MoviesFragment extends Fragment {
+public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private MoviesAdapter adapter;
     private MyViewModel myViewModel;
     private ProgressBar progressBar;
-    private ImageView imageView;
+    private SwipeRefreshLayout swipeRefreshLayout;
+   // private ImageView imageView;
     //To fetch data
     private Observer<List<Movie>> getMovies = new Observer<List<Movie>>() {
         @Override
@@ -51,9 +53,9 @@ public class MoviesFragment extends Fragment {
             if (list.size() > 0) {
                 adapter = new MoviesAdapter(getContext(), list);
                 mRecyclerView.setAdapter(adapter);
-                imageView.setVisibility(View.GONE);
+               // imageView.setVisibility(View.GONE);
             } else {
-                imageView.setVisibility(View.VISIBLE);
+              //  imageView.setVisibility(View.VISIBLE);
             }
         }
     };
@@ -67,22 +69,24 @@ public class MoviesFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_movies, container, false);
         mRecyclerView = v.findViewById(R.id.rv_movies);
         progressBar = v.findViewById(R.id.progressBar);
-        imageView = v.findViewById(R.id.error_img);
+     //   imageView = v.findViewById(R.id.error_img);
+        swipeRefreshLayout = v.findViewById(R.id.sr_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
         showLoading(true);
+
         return v;
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         loadMovies();
-
     }
 
     private void loadMovies() {
-        myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
-        myViewModel.getMovies(getActivity()).observe(getActivity(), getMovies);
+
+            myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
+            myViewModel.getMovies(getActivity()).observe(getActivity(), getMovies);
 
     }
 
@@ -117,9 +121,6 @@ public class MoviesFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 if (newText.isEmpty() == false)
                     loadSearch(newText);
-                else
-                    loadMovies();
-
                 return true;
             }
         });
@@ -128,10 +129,15 @@ public class MoviesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        loadMovies();
         setHasOptionsMenu(true);
     }
 
+    @Override
+    public void onRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
+        loadMovies();
+        showLoading(false);
+    }
 }
 
 

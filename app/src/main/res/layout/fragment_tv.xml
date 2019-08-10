@@ -1,32 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tvshowpackage.TVFragment"
-    android:orientation="vertical"
-    >
-    <ImageView
-        android:id="@+id/error_img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/error_by_delon"
-        android:visibility="gone"
-        />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_tvshow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </android.support.v7.widget.RecyclerView>
-    <android.support.constraint.ConstraintLayout
+    android:id="@+id/sr_layout"
+    tools:context=".tvshowpackage.TVFragment">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
@@ -42,5 +24,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
-    </android.support.constraint.ConstraintLayout>
-</LinearLayout>
+    <ImageView
+        android:id="@+id/error_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/error_by_delon"
+        android:visibility="gone"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_tvshow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

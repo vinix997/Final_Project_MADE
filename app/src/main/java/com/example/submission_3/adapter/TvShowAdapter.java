@@ -38,23 +38,23 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TvShowAdapter.ViewHolder viewHolder, final int i) {
-        String poster = "https://image.tmdb.org/t/p/w500" + tvData.get(i).getPosterPath();
+    public void onBindViewHolder(@NonNull TvShowAdapter.ViewHolder viewHolder, int i) {
+        String poster = "https://image.tmdb.org/t/p/w500" + tvData.get(viewHolder.getAdapterPosition()).getPosterPath();
         Glide.with(context)
                 .load(poster)
                 .apply(new RequestOptions().override(300, 300))
                 .into(viewHolder.img);
 
-        viewHolder.txtDateStart.setText(tvData.get(i).getFirstAirDate());
-        viewHolder.txtTitle.setText(tvData.get(i).getName());
-        viewHolder.txtPopularity.setText(tvData.get(i).getPopularity().toString());
-        viewHolder.txtLanguage.setText(tvData.get(i).getOriginalLanguage().toUpperCase());
-        viewHolder.rating.setText(tvData.get(i).getVoteAverage().toString());
+        viewHolder.txtDateStart.setText(tvData.get(viewHolder.getAdapterPosition()).getFirstAirDate());
+        viewHolder.txtTitle.setText(tvData.get(viewHolder.getAdapterPosition()).getName());
+        viewHolder.txtPopularity.setText(tvData.get(viewHolder.getAdapterPosition()).getPopularity().toString());
+        viewHolder.txtLanguage.setText(tvData.get(viewHolder.getAdapterPosition()).getOriginalLanguage().toUpperCase());
+        viewHolder.rating.setText(tvData.get(viewHolder.getAdapterPosition()).getVoteAverage().toString());
         viewHolder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent detailIntent = new Intent(context, DetailActivity.class);
-                detailIntent.putExtra(DetailActivity.EXTRA_DATA, tvData.get(i));
+                detailIntent.putExtra(DetailActivity.EXTRA_DATA, tvData.get(viewHolder.getAdapterPosition()));
                 detailIntent.putExtra("check", false);
                 context.startActivity(detailIntent);
             }
