@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.submission_3.DetailActivity;
 import com.example.submission_3.R;
@@ -42,7 +43,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<TvShowAdapter.ViewHolder
         String poster = "https://image.tmdb.org/t/p/w500" + tvData.get(viewHolder.getAdapterPosition()).getPosterPath();
         Glide.with(context)
                 .load(poster)
-                .apply(new RequestOptions().override(300, 300))
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(25)))
                 .into(viewHolder.img);
 
         viewHolder.txtDateStart.setText(tvData.get(viewHolder.getAdapterPosition()).getFirstAirDate());

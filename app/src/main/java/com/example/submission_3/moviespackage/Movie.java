@@ -31,6 +31,7 @@ public class Movie implements Parcelable {
     @SerializedName("id")
     private int id;
 
+
     @ColumnInfo(name = "name")
     @SerializedName("title")
     private String title;
@@ -52,6 +53,10 @@ public class Movie implements Parcelable {
     @SerializedName("vote_average")
     private double voteAverage;
 
+    @ColumnInfo(name = "backdrop_path")
+    @SerializedName("backdrop_path")
+    private String backdropPath;
+
     public Movie(Cursor cursor) {
         this.id = cursor.getInt(cursor.getColumnIndex("id"));
         this.title = cursor.getString(cursor.getColumnIndex("name"));
@@ -59,6 +64,7 @@ public class Movie implements Parcelable {
         this.overview = cursor.getString(cursor.getColumnIndex("overview"));
         this.releaseDate = cursor.getString(cursor.getColumnIndex("release_date"));
         this.voteAverage = cursor.getFloat(cursor.getColumnIndex("vote_average"));
+        this.backdropPath = cursor.getString(cursor.getColumnIndex("backdrop_path"));
     }
 
     public Movie() {
@@ -71,6 +77,7 @@ public class Movie implements Parcelable {
         this.id = (Integer) in.readValue(Integer.class.getClassLoader());
         this.title = in.readString();
         this.voteAverage = (Double) in.readValue(Double.class.getClassLoader());
+        this.backdropPath = in.readString();
     }
 
     //Utils
@@ -82,6 +89,7 @@ public class Movie implements Parcelable {
         movie.setOverview(values.getAsString("overview"));
         movie.setReleaseDate(values.getAsString("release_date"));
         movie.setVoteAverage(values.getAsFloat("vote_average"));
+        movie.setBackdropPath(values.getAsString("backdrop_path"));
 
         return movie;
     }
@@ -134,6 +142,11 @@ public class Movie implements Parcelable {
         this.voteAverage = voteAverage;
     }
 
+    public void setBackdropPath(String backdropPath) {
+        this.backdropPath = backdropPath;
+    }
+
+    public String getBackdropPath() {return backdropPath;}
     @Override
     public int describeContents() {
         return 0;
@@ -147,5 +160,6 @@ public class Movie implements Parcelable {
         dest.writeValue(this.id);
         dest.writeString(this.title);
         dest.writeValue(this.voteAverage);
+        dest.writeString(this.backdropPath);
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView2"
     android:layout_width="match_parent"
-    android:background="#F7F7F7"
+    android:background="#000"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -15,32 +15,57 @@
         android:layout_height="match_parent"
         android:paddingTop="@dimen/activity_horizontal_margin"
         android:paddingBottom="@dimen/activity_vertical_margin">
+
         <ImageView
-            android:id="@+id/img_id"
-            android:layout_width="200dp"
-            android:layout_height="280dp"
-            android:contentDescription="Movie Poster"
+            android:id="@+id/backdrop_id"
+            android:layout_width="match_parent"
+            android:layout_height="165dp"
+            android:src="@drawable/poster_a_start_is_born"
             android:scaleType="fitXY"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:contentDescription="backdrop poster"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/poster_a_start_is_born" />
+            android:tint="@color/poster_banner_tint"
+            />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardviewPosterDetail"
+            android:layout_width="120dp"
+            android:layout_height="170dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="138dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/backdrop_id"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/backdrop_id"
+            app:layout_constraintTop_toTopOf="@+id/backdrop_id"
+            app:layout_constraintVertical_bias="0.0">
+
+            <ImageView
+                android:id="@+id/img_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Poster"
+                android:scaleType="fitXY"
+                tools:src="@android:color/darker_gray" />
+        </android.support.v7.widget.CardView>
 
         <TextView
             android:id="@+id/title_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginStart="220dp"
+            android:layout_marginStart="160dp"
+
             android:layout_marginTop="10dp"
+            android:textColor="#fff"
+            android:textSize="15sp"
 
-            android:textColor="#000000"
-            android:textSize="20sp"
             android:textStyle="bold"
-
-            app:layout_constraintStart_toEndOf="@+id/img_id"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backdrop_id"
             tools:text="@string/test" />
 
         <TextView
@@ -48,12 +73,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title_id"
-            android:layout_marginStart="220dp"
-            android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/img_id"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:textStyle="italic"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#fff"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_id"
             tools:text="@string/test" />
@@ -62,11 +85,13 @@
             android:id="@+id/desc_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@+id/img_id"
-            tools:layout_editor_absoluteX="16dp"
+
+            android:layout_marginTop="30dp"
+            android:textColor="#fff"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardviewPosterDetail"
             tools:text="@string/test" />
 
 
@@ -74,10 +99,10 @@
             android:id="@+id/rating_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="220dp"
-            android:layout_marginTop="16dp"
-            android:textColor="#000000"
-            android:textSize="18sp"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#fff"
+            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date_id"
             tools:text="@string/test" />

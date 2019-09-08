@@ -29,6 +29,7 @@ public class DetailActivity extends AppCompatActivity {
     TextView detailRating;
     TextView detailPopularity;
     TextView detailLanguage;
+    ImageView detailBackdrop;
     Movie movie;
     TVShow tvShow;
     private Menu menu;
@@ -53,12 +54,18 @@ public class DetailActivity extends AppCompatActivity {
     private void showMovie() {
         setContentView(R.layout.detail_movies);
         movie = getIntent().getParcelableExtra(EXTRA_DATA);
-        String poster = "https://image.tmdb.org/t/p/w500" + movie.getPosterPath();
+        String poster = "https://image.tmdb.org/t/p/original" + movie.getPosterPath();
         detailPhoto = findViewById(R.id.img_id);
         Glide.with(this)
                 .load(poster)
                 .apply(new RequestOptions().override(300, 300))
                 .into(detailPhoto);
+        detailBackdrop = findViewById(R.id.backdrop_id);
+        String backdrop = "https://image.tmdb.org/t/p/w780" + movie.getBackdropPath();
+        Glide.with(this)
+                .load(backdrop)
+                .apply(new RequestOptions().override(300, 300))
+                .into(detailBackdrop);
         detailTitle = findViewById(R.id.title_id);
         detailTitle.setText(movie.getTitle());
         detailDate = findViewById(R.id.date_id);
@@ -114,6 +121,12 @@ public class DetailActivity extends AppCompatActivity {
                 .load(poster)
                 .apply(new RequestOptions().override(300, 300))
                 .into(detailPhoto);
+        detailBackdrop = findViewById(R.id.backdrop_id);
+        String backdrop = "https://image.tmdb.org/t/p/original" + tvShow.getBackdropPath();
+        Glide.with(this)
+                .load(backdrop)
+                .apply(new RequestOptions().override(300, 300))
+                .into(detailBackdrop);
         detailTitle = findViewById(R.id.title_id);
         detailTitle.setText(tvShow.getName());
         detailPopularity = findViewById(R.id.pop_id);

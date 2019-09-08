@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimary">#303030</color>303030
+    <color name="cardView">#4A4B4D</color>
     <color name="colorPrimaryDark">#585555</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorBlack">#000000</color>
+    <color name="poster_banner_tint">#6F000000</color>
 </resources>

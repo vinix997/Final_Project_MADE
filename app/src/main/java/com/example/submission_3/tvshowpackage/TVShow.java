@@ -53,6 +53,9 @@ public class TVShow implements Parcelable {
     @SerializedName("poster_path")
     private String posterPath;
 
+    @ColumnInfo(name = "backdrop_path")
+    @SerializedName("backdrop_path")
+    private String backdropPath;
     public TVShow() {
     }
 
@@ -65,6 +68,7 @@ public class TVShow implements Parcelable {
         this.voteAverage = (Double) in.readValue(Double.class.getClassLoader());
         this.overview = in.readString();
         this.posterPath = in.readString();
+        this.backdropPath = in.readString();
     }
 
 
@@ -132,6 +136,9 @@ public class TVShow implements Parcelable {
         this.posterPath = posterPath;
     }
 
+    public void setBackdropPath (String backdropPath) { this.backdropPath = backdropPath; }
+
+    public String getBackdropPath() { return backdropPath; }
     @Override
     public int describeContents() {
         return 0;
@@ -147,6 +154,7 @@ public class TVShow implements Parcelable {
         dest.writeValue(this.voteAverage);
         dest.writeString(this.overview);
         dest.writeString(this.posterPath);
+        dest.writeString(this.backdropPath);
     }
 }
 

@@ -12,6 +12,7 @@
             android:key="@string/key_daily_reminder"
             android:summary="@string/switch_daily"
             android:defaultValue="false"
+
             />
         <SwitchPreference android:title="@string/title_upcoming"
             android:key="@string/key_upcoming_reminder"

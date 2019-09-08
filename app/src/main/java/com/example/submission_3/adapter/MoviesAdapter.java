@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.submission_3.DetailActivity;
 import com.example.submission_3.R;
@@ -45,7 +46,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         Glide.with(context)
                 .load(poster)
-                .apply(new RequestOptions().override(300, 300))
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(25)))
                 .into(viewHolder.img);
         viewHolder.txtTitle.setText(movies.get(viewHolder.getAdapterPosition()).getTitle());
         viewHolder.txtDateStart.setText(movies.get(viewHolder.getAdapterPosition()).getReleaseDate());
@@ -65,7 +66,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return movies.size();
+            return movies.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -74,7 +75,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         TextView rating;
         TextView txtTitle;
         ImageButton imgButton;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgButton = itemView.findViewById(R.id.button_id);
@@ -82,7 +82,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
             img = itemView.findViewById(R.id.img_id);
             txtDateStart = itemView.findViewById(R.id.date_id);
             txtTitle = itemView.findViewById(R.id.title_id);
-
         }
     }
 

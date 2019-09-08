@@ -64,7 +64,11 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             Intent mIntent = new Intent(this, SettingsActivity.class);
             startActivity(mIntent);
         }
-
+        if(item.getItemId() == R.id.action_about)
+        {
+            Intent mIntent = new Intent(this, AboutActivity.class);
+            startActivity(mIntent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
