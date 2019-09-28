@@ -17,7 +17,7 @@
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            app:tabBackground="@color/colorGold"
             app:tabGravity="fill"
             app:tabTextColor="#000"
             app:tabIndicatorColor="#000"

@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         viewPagerBot = findViewById(R.id.viewpager);
         bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);

@@ -9,4 +9,8 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
     </style>
 
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/duskYellow</item>
+        <item name="colorControlNormal">@color/lightGrey</item>
+    </style>
 </resources>

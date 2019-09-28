@@ -137,6 +137,7 @@ public class UpcomingReminder extends BroadcastReceiver {
                 showNotification(context, movie.getTitle(), movie.getReleaseDate(), notifId);
                 notifId++;
             }
+
         }
     }
 

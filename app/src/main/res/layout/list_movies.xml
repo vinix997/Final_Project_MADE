@@ -7,8 +7,11 @@
     android:orientation="vertical">
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/cardView"
+        android:id="@+id/movie_cv"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_margin="5dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="8dp"
@@ -39,7 +42,7 @@
 
             android:layout_marginStart="135dp"
             android:layout_toEndOf="@+id/img_id"
-            android:textColor="#ffffff"
+            android:textColor="#fff"
 
             android:textSize="18sp"
             android:textStyle="bold"
@@ -57,41 +60,52 @@
             android:layout_toEndOf="@+id/img_id"
             android:textColor="#fff"
             android:textSize="12sp"
-            android:textStyle="italic"
             app:layout_constraintStart_toEndOf="@+id/img_id"
             app:layout_constraintTop_toBottomOf="@+id/title_id"
             tools:text="@string/test" />
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="25dp"
-            android:src="@drawable/ic_star_black_24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/rating_id"
-            app:layout_constraintStart_toEndOf="@+id/img_id"
-            app:layout_constraintTop_toBottomOf="@+id/img_id" />
 
-        <TextView
+        <RatingBar
             android:id="@+id/rating_id"
-            android:layout_width="match_parent"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:theme="@style/RatingBar"
             android:layout_height="wrap_content"
-            android:layout_marginStart="160dp"
-            android:layout_marginBottom="4dp"
+            android:stepSize="0.01"
+            android:layout_marginStart="144dp"
+            android:layout_marginBottom="16dp"
             android:textColor="#fff"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Test" />
+            tools:text="@string/test" />
 
-        <ImageButton
-            android:id="@+id/button_id"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="?android:selectableItemBackground"
-            android:src="@drawable/ic_more_black_24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/rating_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="118dp"
+            android:textColor="@color/duskYellow"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="@id/rating_id"
+            app:layout_constraintStart_toEndOf="@+id/rating_id"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="75" />
+
+        <TextView
+            android:id="@+id/genre_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="135dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#fff"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date_id"
+            tools:text="@string/test" />
+
+
 
     </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>

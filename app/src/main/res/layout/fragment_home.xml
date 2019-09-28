@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="fill"
+            app:tabBackground="@color/colorGold"
             app:tabMode="fixed"
             app:tabTextColor="#000"
             app:tabIndicatorColor="#000"

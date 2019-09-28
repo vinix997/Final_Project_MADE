@@ -14,10 +14,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
+import com.example.submission_3.ListMovieGenre;
 import com.example.submission_3.R;
 import com.example.submission_3.adapter.MoviesAdapter;
 import com.example.submission_3.viewmodel.MyViewModel;
@@ -34,14 +34,22 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private MyViewModel myViewModel;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
-   // private ImageView imageView;
+    private List<ListMovieGenre> listGenres;
     //To fetch data
+    private Observer<List<ListMovieGenre>> getGenres = new Observer<List<ListMovieGenre>>() {
+       @Override
+       public void onChanged(@Nullable List<ListMovieGenre> listMovieGenres) {
+           listGenres = listMovieGenres;
+       }
+   };
     private Observer<List<Movie>> getMovies = new Observer<List<Movie>>() {
         @Override
         public void onChanged(@Nullable List<Movie> movies) {
             if (movies.size()>0) {
-                adapter = new MoviesAdapter(getContext(), movies);
+
+                adapter = new MoviesAdapter(getContext(), movies, listGenres);
                 mRecyclerView.setAdapter(adapter);
+
                 showLoading(false);
             }
 
@@ -51,7 +59,7 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
         @Override
         public void onChanged(@Nullable List<Movie> list) {
             if (list.size() > 0) {
-                adapter = new MoviesAdapter(getContext(), list);
+                adapter = new MoviesAdapter(getContext(), list, listGenres);
                 mRecyclerView.setAdapter(adapter);
                // imageView.setVisibility(View.GONE);
             } else {
@@ -80,6 +88,7 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        loadGenre();
         loadMovies();
     }
 
@@ -93,6 +102,12 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private void loadSearch(String query) {
         myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
         myViewModel.getSearch(query).observe(getActivity(), getSearch);
+    }
+
+    private void loadGenre()
+    {
+        myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
+        myViewModel.getGenreList().observe(getActivity() ,getGenres);
     }
 
     //To show progressbar or not
@@ -135,6 +150,7 @@ public class MoviesFragment extends Fragment implements SwipeRefreshLayout.OnRef
     @Override
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(false);
+        loadGenre();
         loadMovies();
         showLoading(false);
     }

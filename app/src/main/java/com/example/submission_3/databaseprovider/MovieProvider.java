@@ -10,7 +10,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.example.submission_3.dao.Moviedao;
+import com.example.submission_3.dao.MovieDAO;
 import com.example.submission_3.moviespackage.Movie;
 import com.example.submission_3.room.DBRoom;
 
@@ -62,7 +62,7 @@ public class MovieProvider extends ContentProvider {
             if (context == null) {
                 return null;
             }
-            Moviedao movieDao = DBRoom.getInstance(context).movieDao();
+            MovieDAO movieDao = DBRoom.getInstance(context).movieDao();
             Cursor cursor = null;
             if (match == CODE_MOVIE_DIR && uri != null) {
                 cursor = movieDao.getFavouriteMovieCursor();

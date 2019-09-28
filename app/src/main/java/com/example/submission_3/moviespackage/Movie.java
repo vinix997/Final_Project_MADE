@@ -3,34 +3,32 @@ package com.example.submission_3.moviespackage;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //Model
 //Auto generated
 @Entity(tableName = "Movie")
 public class Movie implements Parcelable {
-    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
-        @Override
-        public Movie createFromParcel(Parcel source) {
-            return new Movie(source);
-        }
-
-        @Override
-        public Movie[] newArray(int size) {
-            return new Movie[size];
-        }
-    };
     @PrimaryKey
     @ColumnInfo(name = "id")
     @SerializedName("id")
     private int id;
 
+    @ColumnInfo(name = "genre_ids")
+    @SerializedName("genre_ids")
+    @Ignore
+    private List<Integer> genreIds;
 
     @ColumnInfo(name = "name")
     @SerializedName("title")
@@ -39,6 +37,9 @@ public class Movie implements Parcelable {
     @ColumnInfo(name = "poster_path")
     @SerializedName("poster_path")
     private String posterPath;
+
+    @ColumnInfo(name = "genre_string")
+    private String genres_string;
 
 
     @ColumnInfo(name = "overview")
@@ -68,16 +69,6 @@ public class Movie implements Parcelable {
     }
 
     public Movie() {
-    }
-
-    protected Movie(Parcel in) {
-        this.posterPath = in.readString();
-        this.overview = in.readString();
-        this.releaseDate = in.readString();
-        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.title = in.readString();
-        this.voteAverage = (Double) in.readValue(Double.class.getClassLoader());
-        this.backdropPath = in.readString();
     }
 
     //Utils
@@ -147,6 +138,15 @@ public class Movie implements Parcelable {
     }
 
     public String getBackdropPath() {return backdropPath;}
+
+    public List<Integer> getGenre() {
+        return genreIds;
+    }
+
+    public void setGenre(List<Integer> genreIds) {
+        this.genreIds = genreIds;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -154,12 +154,45 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeList(this.genreIds);
+        dest.writeString(this.title);
         dest.writeString(this.posterPath);
         dest.writeString(this.overview);
         dest.writeString(this.releaseDate);
-        dest.writeValue(this.id);
-        dest.writeString(this.title);
-        dest.writeValue(this.voteAverage);
+        dest.writeDouble(this.voteAverage);
         dest.writeString(this.backdropPath);
+    }
+
+    protected Movie(Parcel in) {
+        this.id = in.readInt();
+        this.genreIds = new ArrayList<>();
+        in.readList(this.genreIds, Integer.class.getClassLoader());
+        this.title = in.readString();
+        this.posterPath = in.readString();
+        this.overview = in.readString();
+        this.releaseDate = in.readString();
+        this.voteAverage = in.readDouble();
+        this.backdropPath = in.readString();
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel source) {
+            return new Movie(source);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
+
+    public String getGenres_string() {
+        return genres_string;
+    }
+
+    public void setGenres_string(String genres_string) {
+        this.genres_string = genres_string;
     }
 }

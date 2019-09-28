@@ -4,6 +4,9 @@
     <color name="cardView">#4A4B4D</color>
     <color name="colorPrimaryDark">#585555</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorBlack">#000000</color>
+    <color name="colorBlack">#3F51B5</color>
     <color name="poster_banner_tint">#6F000000</color>
+    <color name="colorGold">#ffd700</color>
+    <color name="duskYellow">#ffc922</color>
+    <color name="lightGrey">#d3d3d3</color>
 </resources>

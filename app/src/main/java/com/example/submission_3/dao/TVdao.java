@@ -10,7 +10,7 @@ import com.example.submission_3.tvshowpackage.TVShow;
 import java.util.List;
 
 @Dao
-public interface TVdao {
+public interface TvDAO {
     @Query("SELECT * FROM TVShow WHERE id = :id")
     TVShow findTvById(int id);
 

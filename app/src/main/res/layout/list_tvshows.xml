@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/cardView"
         android:layout_margin="5dp"
+        android:id="@+id/tv_cv"
+        android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="15dp"
         app:cardElevation="100dp"
 
@@ -56,73 +58,51 @@
             android:layout_toEndOf="@+id/img_id"
             android:textColor="#fff"
             android:textSize="12sp"
-            android:textStyle="italic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_id"
             tools:text="@string/test" />
 
         <TextView
-            android:id="@+id/language_id"
+            android:id="@+id/genres_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/startDate_id"
             android:layout_marginStart="135dp"
-            android:layout_toEndOf="@+id/img_id"
+            android:layout_marginTop="5dp"
             android:textColor="#fff"
             android:textSize="12sp"
-            android:textStyle="italic"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/startDate_id"
+            app:layout_constraintTop_toBottomOf="@id/startDate_id"
             tools:text="@string/test" />
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="25dp"
-            android:src="@drawable/ic_star_black_24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/rating_id"
-            app:layout_constraintStart_toEndOf="@+id/img_id"
-            app:layout_constraintTop_toBottomOf="@+id/img_id" />
-
-        <TextView
+        <RatingBar
             android:id="@+id/rating_id"
-            android:layout_width="match_parent"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:theme="@style/RatingBar"
             android:layout_height="wrap_content"
-            android:layout_marginStart="160dp"
-            android:layout_marginBottom="4dp"
+            android:stepSize="0.01"
+            android:layout_marginStart="144dp"
+            android:layout_marginBottom="16dp"
             android:textColor="#fff"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/test" />
+
+        <TextView
+            android:id="@+id/rating_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="224dp"
+
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/duskYellow"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/rating_id"
             tools:text="Test" />
 
-        <TextView
-            android:id="@+id/pop_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/language_id"
-            android:layout_marginStart="135dp"
-            android:layout_toEndOf="@+id/img_id"
-            android:textColor="#fff"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/language_id"
-            tools:text="@string/test" />
 
-        <ImageButton
-            android:id="@+id/button_id"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:background="?android:selectableItemBackground"
-            android:src="@drawable/ic_more_black_24dp"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pop_id"
-            app:layout_constraintVertical_bias="1.0" />
 
 
     </android.support.constraint.ConstraintLayout>

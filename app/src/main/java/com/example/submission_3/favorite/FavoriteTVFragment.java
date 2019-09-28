@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.submission_3.ListTVGenre;
 import com.example.submission_3.R;
 import com.example.submission_3.adapter.TvShowAdapter;
 import com.example.submission_3.tvshowpackage.TVShow;
@@ -28,15 +29,25 @@ public class FavoriteTVFragment extends Fragment implements SwipeRefreshLayout.O
     private List<TVShow> list = new ArrayList<>();
     private ImageView imageView;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private List<ListTVGenre> listGenres;
+    private List<ListTVGenre> listgenres = new ArrayList<>();
+
+    private Observer<List<ListTVGenre>> getListGenre = new Observer<List<ListTVGenre>>() {
+        @Override
+        public void onChanged(@Nullable List<ListTVGenre> listTVGenres) {
+            listGenres = listTVGenres;
+        }
+    };
+
     private Observer<List<TVShow>> getFavTVShows = new Observer<List<TVShow>>() {
         @Override
         public void onChanged(@Nullable List<TVShow> tvShows) {
             if (tvShows.size() > 0) {
-                adapter = new TvShowAdapter(getContext(), tvShows);
+                adapter = new TvShowAdapter(getContext(), tvShows, listGenres);
                 mRecyclerView.setAdapter(adapter);
                 imageView.setVisibility(View.GONE);
             } else {
-                adapter = new TvShowAdapter(getContext(), list);
+                adapter = new TvShowAdapter(getContext(), list, listgenres);
                 mRecyclerView.setAdapter(adapter);
                 imageView.setVisibility(View.VISIBLE);
             }
@@ -59,7 +70,11 @@ public class FavoriteTVFragment extends Fragment implements SwipeRefreshLayout.O
         myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
         myViewModel.getFavListTv(getActivity()).observe(getActivity(), getFavTVShows);
     }
-
+    private void loadGenres()
+    {
+        myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
+        myViewModel.getTVGenre().observe(getActivity(),getListGenre);
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,12 +83,14 @@ public class FavoriteTVFragment extends Fragment implements SwipeRefreshLayout.O
     @Override
     public void onResume() {
         super.onResume();
+        loadGenres();
         loadFavoriteData();
     }
 
     @Override
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(false);
+        loadGenres();
         loadFavoriteData();
 
     }

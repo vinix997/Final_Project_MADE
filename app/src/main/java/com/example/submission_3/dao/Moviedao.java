@@ -12,7 +12,7 @@ import com.example.submission_3.moviespackage.Movie;
 import java.util.List;
 
 @Dao
-public interface Moviedao {
+public interface MovieDAO {
     @Insert
     long addMovie(Movie movie);
 

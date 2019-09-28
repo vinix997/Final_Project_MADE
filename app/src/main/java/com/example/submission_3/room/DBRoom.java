@@ -5,12 +5,15 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-import com.example.submission_3.dao.Moviedao;
-import com.example.submission_3.dao.TVdao;
+import com.example.submission_3.ListMovieGenre;
+import com.example.submission_3.ListTVGenre;
+import com.example.submission_3.dao.GenreDAO;
+import com.example.submission_3.dao.MovieDAO;
+import com.example.submission_3.dao.TvDAO;
 import com.example.submission_3.moviespackage.Movie;
 import com.example.submission_3.tvshowpackage.TVShow;
 
-@Database(entities = {Movie.class, TVShow.class}, version = 2, exportSchema = false)
+@Database(entities = {Movie.class, TVShow.class, ListMovieGenre.class, ListTVGenre.class}, version = 100, exportSchema = false)
 public abstract class DBRoom extends RoomDatabase {
     private static DBRoom dbRoom;
 
@@ -24,9 +27,10 @@ public abstract class DBRoom extends RoomDatabase {
         return dbRoom;
     }
 
-    public abstract Moviedao movieDao();
+    public abstract MovieDAO movieDao();
 
-    public abstract TVdao tvDao();
+    public abstract TvDAO tvDao();
 
+    public abstract GenreDAO genreDao();
 
 }

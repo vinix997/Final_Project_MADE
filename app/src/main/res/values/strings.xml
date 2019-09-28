@@ -9,8 +9,8 @@
     <string name="rating">Rating: </string>\
     <string name="overview">Overview:</string>
     <string name="popularity">Popularity:</string>
-    <string name="fAirDate">First Air Date:</string>
-    <string name="oriLang">Original Language:</string>
+    <string name="fAirDate">First Air:</string>
+    <string name="oriLang">Language:</string>
     <string name="home">Home</string>
     <string name="favorite">Favourite</string>
     <string name="appwidget_text">EXAMPLE</string>

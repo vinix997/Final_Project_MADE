@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
+import com.example.submission_3.ListTVGenre;
 import com.example.submission_3.R;
 import com.example.submission_3.adapter.TvShowAdapter;
 import com.example.submission_3.viewmodel.MyViewModel;
@@ -35,14 +36,21 @@ public class TVFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
     private TvShowAdapter adapter;
     private ProgressBar progressBar;
     private ImageView errorImg;
-
+    private List<ListTVGenre> listGenres;
     private SwipeRefreshLayout swipeRefreshLayout;
     //To fetch data
+    private Observer<List<ListTVGenre>> getListGenre = new Observer<List<ListTVGenre>>() {
+        @Override
+        public void onChanged(@Nullable List<ListTVGenre> listTVGenres) {
+            listGenres = listTVGenres;
+        }
+    };
+
     private Observer<List<TVShow>> getTvs = new Observer<List<TVShow>>() {
         @Override
         public void onChanged(@Nullable List<TVShow> tvShows) {
-            if (tvShows != null) {
-                adapter = new TvShowAdapter(getContext(), tvShows);
+            if (tvShows.size()>0) {
+                adapter = new TvShowAdapter(getContext(), tvShows, listGenres);
                 mRecyclerView.setAdapter(adapter);
                 showLoading(false);
             }
@@ -54,7 +62,7 @@ public class TVFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
         @Override
         public void onChanged(@Nullable List<TVShow> tvShows) {
             if (tvShows.size() > 0) {
-                adapter = new TvShowAdapter(getContext(), tvShows);
+                adapter = new TvShowAdapter(getContext(), tvShows, listGenres);
                 mRecyclerView.setAdapter(adapter);
                 errorImg.setVisibility(View.GONE);
             } else {
@@ -78,9 +86,14 @@ public class TVFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
         showLoading(true);
         return v;
     }
-    private void loadMovies() {
+    private void loadTv() {
         myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
         myViewModel.getTvs(getActivity()).observe(getActivity(), getTvs);
+    }
+    private void loadGenres()
+    {
+        myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
+        myViewModel.getTVGenre().observe(getActivity(),getListGenre);
     }
 
     //To show progressbar or not
@@ -116,12 +129,14 @@ public class TVFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        loadMovies();
+        loadGenres();
+        loadTv();
     }
     private void loadSearch(String query) {
         myViewModel = ViewModelProviders.of(getActivity()).get(MyViewModel.class);
         myViewModel.getSearchTv(query).observe(getActivity(), getSearchTv);
     }
+
 
 
     @Override
@@ -133,7 +148,8 @@ public class TVFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
     @Override
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(false);
-        loadMovies();
+        loadGenres();
+        loadTv();
         showLoading(false);
     }
 }

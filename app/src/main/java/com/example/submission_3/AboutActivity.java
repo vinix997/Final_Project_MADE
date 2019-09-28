@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,6 +15,7 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_about);
         igBtn = findViewById(R.id.btn_ig);
         igBtn.setOnClickListener(this);
@@ -21,6 +23,12 @@ public class AboutActivity extends AppCompatActivity implements View.OnClickList
         fbBtn.setOnClickListener(this);
         ghBtn = findViewById(R.id.btn_gh);
         ghBtn.setOnClickListener(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
