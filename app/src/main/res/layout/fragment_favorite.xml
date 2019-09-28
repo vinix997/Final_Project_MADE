@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".favorite.FavoriteFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerFav"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabBackground="@color/colorGold"
+            app:tabGravity="fill"
+            app:tabTextColor="#000"
+            app:tabIndicatorColor="#000"
+            app:tabMaxWidth="0dp"
+            app:tabMode="fixed"></com.google.android.material.tabs.TabLayout>
+
+    </androidx.viewpager.widget.ViewPager>
+</FrameLayout>
